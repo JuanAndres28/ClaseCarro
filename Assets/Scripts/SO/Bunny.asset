@@ -16,6 +16,6 @@ MonoBehaviour:
   car: {fileID: 7850132976396058757, guid: 3ab0ab0fb15e3cd4c9c833395d636083, type: 3}
   carImage: {fileID: 0}
   carName: 
-  motorForce: 0
-  brakeForce: 0
-  maxSteeringAngle: 0
+  motorForce: 1000
+  brakeForce: 2000
+  maxSteeringAngle: 30

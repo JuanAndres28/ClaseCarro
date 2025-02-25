@@ -12,6 +12,7 @@ public class CarController : MonoBehaviour
     // Almacena el componente que tiene el player del input.
     private PlayerInput playerInput;
 
+    public Cars car;
     // Almacena el componente de Rigidbody que tiene el player.
     private Rigidbody rb;
 
@@ -38,15 +39,9 @@ public class CarController : MonoBehaviour
     [Header("Values")]
 
     // Varaiable que almacena la velocidad del objeto.
-    [SerializeField] private float motorForce;
+    private float motorForce;
 
-    // Variable que almacena la fuerza de los frenos del objeto.
-    [SerializeField] private float brakeForce;
-
-    // Variable que almacena el �ngulo m�ximo a darle a las ruedas en el giro.
-    [SerializeField] private float maxSteeringAngle;
-
-
+   
 
     // Start is called before the first frame update
     void Start()
@@ -54,9 +49,9 @@ public class CarController : MonoBehaviour
         // Se le asigna el componente real al player input y al Rigidbody.
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
-        
+        motorForce = car.MotorForce;
         // Permite modificar el centro de gravedad del objeto, en este caso se baj� para que el carro no se volteara.
-        rb.centerOfMass = new Vector3(0f, -0.5f, 0f);
+        //rb.centerOfMass = new Vector3(0f, -0.5f, 0f);
 
     }
 
@@ -67,6 +62,7 @@ public class CarController : MonoBehaviour
         Motor();
         Steering();
         UpdateWheels();
+        
     }
 
     // M�todo ue almacena el input del jugador-
@@ -83,6 +79,7 @@ public class CarController : MonoBehaviour
     // M�todo que permite agregarle fuerza al motor.
     private void Motor()
     {
+        
         // Con la opci�n motorToruqe de collisionador de las ruedas frontales, se le puede agregar la velocidad y se multiplica por el input vertical.
         frontLeftCollider.motorTorque = verticalInput * motorForce;
         frontRightCollider.motorTorque = verticalInput * motorForce;
@@ -94,10 +91,10 @@ public class CarController : MonoBehaviour
         // Cuando el evento se encuentra en ejecuci�n, y, usando la opci�n brakeToqrque de los colisionadores de las ruedas, se le asigna una fuerza de frenado.
         if (context.performed) 
         {
-            frontLeftCollider.brakeTorque = brakeForce;
-            frontRightCollider.brakeTorque = brakeForce;
-            backLeftCollider.brakeTorque = brakeForce;
-            backRightCollider.brakeTorque = brakeForce;
+            frontLeftCollider.brakeTorque = car.BrakeForce;
+            frontRightCollider.brakeTorque = car.BrakeForce;
+            backLeftCollider.brakeTorque = car.BrakeForce;
+            backRightCollider.brakeTorque = car.BrakeForce;
         }
 
         // Cuando el evento termina o cancela, la fuerza de frenado se devuelve a 0 para que pueda volver a moverse.
@@ -116,7 +113,7 @@ public class CarController : MonoBehaviour
     private void Steering()
     {
         // La variable steering es igual al �ngulo m�ximo por el input horizontal, para que verifique si se gira a la derecha o a la izquierda.
-        steering = maxSteeringAngle * horizontalInput;
+        steering = car.MaxSteeringAngle * horizontalInput;
         frontLeftCollider.steerAngle = steering;
         frontRightCollider.steerAngle = steering;
     }
