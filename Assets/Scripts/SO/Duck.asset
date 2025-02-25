@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f098fe7337d9a44ba474455de14a05e, type: 3}
+  m_Name: Duck
+  m_EditorClassIdentifier: 
+  honk: {fileID: 0}
+  car: {fileID: 7640794859089502171, guid: a8418a240607ae344a2d08cdd71d0728, type: 3}
+  carImage: {fileID: 0}
+  carName: 
+  motorForce: 0
+  brakeForce: 0
+  maxSteeringAngle: 0
