@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   honk: {fileID: 0}
   car: {fileID: 7850132976396058757, guid: 3ab0ab0fb15e3cd4c9c833395d636083, type: 3}
+  miniToy: {fileID: 3580048554663271046, guid: bd7d675913d24ea4aaa1800d1c903988, type: 3}
   carImage: {fileID: 0}
   carName: 
   motorForce: 0
