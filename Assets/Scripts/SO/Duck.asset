@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Duck
   m_EditorClassIdentifier: 
   honk: {fileID: 0}
-  car: {fileID: 7640794859089502171, guid: a8418a240607ae344a2d08cdd71d0728, type: 3}
+  car: {fileID: 862591186759925609, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
+  miniToy: {fileID: 0}
   carImage: {fileID: 0}
   carName: 
   motorForce: 0

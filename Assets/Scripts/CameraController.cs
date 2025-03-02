@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     public static CameraController instance;
 
     // Variable que almacena el objetivo al que la c�mara va a seguir.
-    [SerializeField] private Transform target;
+    public Transform target;
 
     // Variable que almacena un vector 3 con la diferencia que se quiere entre la c�mara y el carro.
     [SerializeField] private Vector3 offset;
