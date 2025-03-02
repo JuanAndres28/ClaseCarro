@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerHealth : MonoBehaviour, IDamageable
+public class CarHealth : MonoBehaviour, IDamageable
 {
     [Header("Config")]
     [SerializeField] private PlayerStats stats; 
@@ -32,7 +32,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     }
 
 
-    public void TakeDamage(int amount)  
+    public void TakeDamage(float amount)  
     {
         if (stats.Health <= 0f) return; 
         stats.Health -= amount; // Reducir la salud
@@ -48,6 +48,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 {
     Debug.Log("el jugador murio");
     //quitar movimiento
+    Rigidbody rb = GetComponent<Rigidbody>();
+    rb.linearVelocity = Vector3.zero;
+    rb.isKinematic = true;
     //mostrar una img? audio?, etc.
     //StartCoroutine(RespawnCoroutine());
 }

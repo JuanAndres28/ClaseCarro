@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14870f1640968e4ca1dc68ce8eb5981, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  Health: 2
-  MiniToys: 0
+  Health: 0
+  MiniToys: 1
