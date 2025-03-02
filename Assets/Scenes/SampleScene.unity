@@ -726,6 +726,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pato
       objectReference: {fileID: 0}
+    - target: {fileID: 943922890326660195, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
+      propertyPath: m_Mass
+      value: 9000
+      objectReference: {fileID: 0}
     - target: {fileID: 2388531753311729778, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
       propertyPath: m_Actions
       value: 
@@ -738,6 +742,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6862796640310034164}
+    - target: {fileID: 4986891908039068241, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
+      propertyPath: motorForce
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 5107479168539344622, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.00050582
