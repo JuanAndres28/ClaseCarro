@@ -751,7 +751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 862591186759925609, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 943922890326660195, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
       propertyPath: m_Mass
@@ -795,7 +795,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5107479168539344622, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.08
+      value: -0.047
       objectReference: {fileID: 0}
     - target: {fileID: 5107479168539344622, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1779,7 +1779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 718751820462152500, guid: baef22c184cac8f43a16187f45234094, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5922712987122249353, guid: baef22c184cac8f43a16187f45234094, type: 3}
       propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Target
