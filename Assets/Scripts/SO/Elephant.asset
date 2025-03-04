@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Elephant
   m_EditorClassIdentifier: 
   honk: {fileID: 0}
-  car: {fileID: 0}
+  car: {fileID: 5895974614395536442, guid: 89120f7e52a71f54f89b209817b4232b, type: 3}
+  miniToy: {fileID: 0}
   carImage: {fileID: 0}
-  carName: 
+  carName: Elefante
   motorForce: 0
   brakeForce: 0
   maxSteeringAngle: 0
