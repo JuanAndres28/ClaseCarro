@@ -15,7 +15,7 @@ MonoBehaviour:
   honk: {fileID: 0}
   car: {fileID: 862591186759925609, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
   miniToy: {fileID: 0}
-  carImage: {fileID: 0}
+  carImage: {fileID: 21300000, guid: f52978429c2ce7e43a78986bfa038409, type: 3}
   carName: Pato
   motorForce: 0
   brakeForce: 0
