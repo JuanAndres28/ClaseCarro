@@ -9,6 +9,7 @@ public class Cars : ScriptableObject
     // Variables que se necesiran en el carro.
     [SerializeField] private AudioClip honk;
     [SerializeField] private GameObject car;
+    [SerializeField] private GameObject miniToy;
     [SerializeField] private Sprite carImage;
     [SerializeField] private string carName;
     [SerializeField] private float motorForce;
@@ -18,6 +19,7 @@ public class Cars : ScriptableObject
     // Getters y Setters para poder ver o modificar los valores de las variables.
     public AudioClip Honk { get => honk; set => honk = value; }
     public GameObject Car { get => car; set => car = value; }
+    public GameObject MiniToy { get => miniToy; set => miniToy = value; }
     public Sprite CarImage { get => carImage; set => carImage = value; }
     public string CarName { get => carName; set => carName = value; }
     public float MotorForce { get => motorForce; set => motorForce = value; }
