@@ -2601,7 +2601,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 89817c2e0f3fbc644a5a5aabb841c142, type: 2}
   - {fileID: 11400000, guid: 23dc24b6f90549a46a5e2c48cd268135, type: 2}
   - {fileID: 11400000, guid: fb14e1ccbf5e3bb41a2a049ac92b5db2, type: 2}
-  spawnCarPosition: {fileID: 0}
+  spawnPositionsData: {fileID: 11400000, guid: 23c8996f16a32f64d96d8a488e7af3b4, type: 2}
   carImage: {fileID: 1697044274}
   carName: {fileID: 1645663160}
 --- !u!4 &2128566017

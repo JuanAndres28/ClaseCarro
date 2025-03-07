@@ -4,7 +4,19 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SeleccionNivel.unity
+    guid: fdae249c610ad664ba95846d438666c4
+  - enabled: 1
+    path: Assets/Scenes/SeleccionCarro.unity
+    guid: 8b7e46c4f548ebe4cafc10db32eb256f
+  - enabled: 1
+    path: "Assets/Scenes/Jard\xEDn.unity"
+    guid: c86d4e3cdd508ef47bd5b0d9f19ff9ff
+  - enabled: 1
+    path: Assets/Scenes/Interior Casa.unity
+    guid: 9a5d9dd7cc799924095589140ce15d67
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0

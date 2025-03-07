@@ -4,6 +4,8 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; 
+
 
 public class CarSelection : MonoBehaviour
 {
@@ -19,24 +21,20 @@ public class CarSelection : MonoBehaviour
     // Lista en donde se almacenan los carros que se van a manejar.
     public Cars[] carList = new Cars[3];
 
-    // Variable que almacena cual es el carro seleccionado.
+    // Variable que almacena cu√°l es el carro seleccionado.
     private Cars selectedCar;
 
-    // Variable que almacena una posiciÛn en el espacio para que el carro aparezca.
-    public Transform spawnCarPosition;
-
-    // Variables de la interfaz gr·fica para que varien dependiendo del carro elegido.
+    // Variables de la interfaz gr√°fica para que var√≠en dependiendo del carro elegido.
     [SerializeField] private Image carImage;
     [SerializeField] private TextMeshProUGUI carName;
 
-    // Õndice para recorrer el arreglo.
+    // √çndice para recorrer el arreglo.
     private int carIndex;
 
     private void Awake()
     {
-        // El Ìndice se inicializa en 0.
+        // El √≠ndice se inicializa en 0.
         carIndex = 0;
-        
     }
 
     // Start is called before the first frame update
@@ -45,41 +43,62 @@ public class CarSelection : MonoBehaviour
         // El carro seleccionado es el primer carro del arreglo.
         selectedCar = carList[carIndex];
 
-        // Se llama el mÈtodo para actualizar los datos de la pantalla.
+        // Se llama el m√©todo para actualizar los datos de la pantalla.
         UpdateSelection();
     }
 
     public void UpdateSelection()
     {
-        // Cuando se efect˙a el mÈtodo, la imagen de la interfaz se actualiza con la del carro seleccionado.
+        // Cuando se efect√∫a el m√©todo, la imagen de la interfaz se actualiza con la del carro seleccionado.
         carImage.sprite = selectedCar.CarImage;
 
-        // Cuando se efect˙a el mÈtodo, el texto de la interfaz se actualiza con el del carro seleccionado.
+        // Cuando se efect√∫a el m√©todo, el texto de la interfaz se actualiza con el del carro seleccionado.
         carName.text = selectedCar.CarName;
 
-        // Se llama el mÈtodo que actualiza las barras con los datos.
+        // Se llama el m√©todo que actualiza las barras con los datos.
         SetScrollBars();
     }
 
-    // MÈtodo que se llama con el botÛn.
+    // M√©todo que se llama con el bot√≥n "Seleccionar".
     public void ChosenCar()
     {
-        // Se instancia el prefab del carro seleccionado y se almacena en una variable.
-       var chosenCar =  Instantiate(selectedCar.Car, spawnCarPosition.position, Quaternion.identity);
-        
-        // Se le indica a la c·mara que el objetivo es el carro seleccionado.
-       CameraController.instance.target = chosenCar.transform;
+        // Obtener el nivel seleccionado.
+        string selectedLevel = PlayerPrefs.GetString("SelectedLevel", "Nivel1"); // Por defecto Nivel1
 
-        // Se guarda la instancia dentro de una ubicaciÛn en el inspector.
-       chosenCar.transform.parent = spawnCarPosition.transform;
+        // Cargar la escena del nivel seleccionado.
+        SceneManager.LoadScene(selectedLevel);
+
+        // Instanciar el carro en la escena del nivel.
+        StartCoroutine(InstantiateCarAfterSceneLoad(selectedLevel));
     }
 
-    // MÈtodo para cambiar el carro seleccionado.
+    // Corrutina para instanciar el carro despu√©s de que la escena se haya cargado.
+    private IEnumerator InstantiateCarAfterSceneLoad(string level)
+    {
+        // Esperar a que la escena se cargue completamente.
+        yield return new WaitUntil(() => SceneManager.GetActiveScene().name == level);
+
+        // Buscar la posici√≥n de spawn en la escena cargada.
+        GameObject spawnPoint = GameObject.Find(level + "SpawnPoint"); // Busca un objeto llamado "Nivel1SpawnPoint" o "Nivel2SpawnPoint"
+        if (spawnPoint == null)
+        {
+            Debug.LogError("No se encontr√≥ el punto de spawn en la escena.");
+            yield break;
+        }
+
+        // Instanciar el carro en la posici√≥n de spawn.
+        var chosenCar = Instantiate(selectedCar.Car, spawnPoint.transform.position, spawnPoint.transform.rotation);
+
+        // Indicar a la c√°mara que el objetivo es el carro seleccionado.
+        CameraController.instance.target = chosenCar.transform;
+    }
+
+    // M√©todo para cambiar el carro seleccionado.
     public void ChangeCarRight()
     {
-        // Valida que si el indice es menor al m·ximo de carros, que suba, y con ello sube el carro de la lista.
-        // luego el carro seleccionadon cambia y se aplican los cambios en la interfaz.
-        if (carIndex < carList.Length - 1) 
+        // Valida que si el √≠ndice es menor al m√°ximo de carros, que suba, y con ello sube el carro de la lista.
+        // Luego el carro seleccionado cambia y se aplican los cambios en la interfaz.
+        if (carIndex < carList.Length - 1)
         {
             carIndex++;
             selectedCar = carList[carIndex];
@@ -87,22 +106,20 @@ public class CarSelection : MonoBehaviour
         }
         else
         {
-            // Si se supera el tamaÒo del arreglo, el Ìndice vuelve a cero, se actualiza el carro seleccionado y
+            // Si se supera el tama√±o del arreglo, el √≠ndice vuelve a cero, se actualiza el carro seleccionado y
             // los cambios en la interfaz.
             carIndex = 0;
             selectedCar = carList[carIndex];
             UpdateSelection();
         }
-
     }
 
-    // MÈtodo que actualiza los valores de las barras.
+    // M√©todo que actualiza los valores de las barras.
     void SetScrollBars()
     {
-        // A cada barra se le da un valor de 0 - 1, dividiento los valores de cada carro con su m·ximo.
-        speedSB.size = Mathf.Clamp01(selectedCar.MotorForce / maxSpeed);   
-        brakeSB.size = Mathf.Clamp01(selectedCar.BrakeForce / maxBrake);   
-        angleSB.size = Mathf.Clamp01(selectedCar.MaxSteeringAngle / maxAngle);   
-        
+        // A cada barra se le da un valor de 0 - 1, dividiendo los valores de cada carro con su m√°ximo.
+        speedSB.size = Mathf.Clamp01(selectedCar.MotorForce / maxSpeed);
+        brakeSB.size = Mathf.Clamp01(selectedCar.BrakeForce / maxBrake);
+        angleSB.size = Mathf.Clamp01(selectedCar.MaxSteeringAngle / maxAngle);
     }
 }
