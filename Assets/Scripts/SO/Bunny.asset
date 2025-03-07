@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Bunny
   m_EditorClassIdentifier: 
   honk: {fileID: 0}
-  car: {fileID: 1270741033738815742, guid: baef22c184cac8f43a16187f45234094, type: 3}
-  miniToy: {fileID: 0}
-  carImage: {fileID: 21300000, guid: 821375c8601bff04394f6a670789fec7, type: 3}
-  carName: Conejo
-  motorForce: 3500
-  brakeForce: 2500
-  maxSteeringAngle: 10
+  car: {fileID: 7850132976396058757, guid: 3ab0ab0fb15e3cd4c9c833395d636083, type: 3}
+  carImage: {fileID: 0}
+  carName: 
+  motorForce: 0
+  brakeForce: 0
+  maxSteeringAngle: 0

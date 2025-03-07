@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class CarController : MonoBehaviour
 {
-    // Variable para guardar la información del input del usuario.
+    // Variable para guardar la informaci�n del input del usuario.
     private Vector2 inputM;
 
     // Almacena el componente que tiene el player del input.
@@ -19,11 +19,8 @@ public class CarController : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
 
-    // Variable para almacenar el ángulo de las ruedas.
+    // Variable para almacenar el �ngulo de las ruedas.
     private float steering;
-
-    [Header("Car")]
-    [SerializeField] private Cars car;
 
     // Variables que almacenan los Wheel Colliders de todas las ruedas.
     [Header("Wheel Data")]
@@ -32,7 +29,7 @@ public class CarController : MonoBehaviour
     [SerializeField] private WheelCollider backRightCollider;
     [SerializeField] private WheelCollider backLeftCollider;
 
-    // Variables que almacenan los objetos físicos de las ruedas.
+    // Variables que almacenan los objetos f�sicos de las ruedas.
     [SerializeField] private Transform frontRightTransform;
     [SerializeField] private Transform frontLeftTransform;
     [SerializeField] private Transform backRightTransform;
@@ -40,24 +37,16 @@ public class CarController : MonoBehaviour
 
     [Header("Values")]
 
-    // Variable que almacena la velocidad del objeto.
+    // Varaiable que almacena la velocidad del objeto.
     [SerializeField] private float motorForce;
 
     // Variable que almacena la fuerza de los frenos del objeto.
     [SerializeField] private float brakeForce;
 
-    // Variable que almacena el ángulo máximo a darle a las ruedas en el giro.
+    // Variable que almacena el �ngulo m�ximo a darle a las ruedas en el giro.
     [SerializeField] private float maxSteeringAngle;
 
-    // Variables para el turbo
-    [Header("Turbo Settings")]
-    [SerializeField] private float turboSpeedMultiplier = 2.0f; // Multiplicador de velocidad durante el turbo
-    [SerializeField] private float turboDuration = 5.0f; // Duración del turbo en segundos
-    [SerializeField] private KeyCode turboKey = KeyCode.LeftShift; // Tecla para activar el turbo
 
-    private bool isTurboActive = false;
-    private float turboTimer = 0f;
-    private float originalMotorForce; // Almacena la fuerza original del motor
 
     // Start is called before the first frame update
     void Start()
@@ -65,66 +54,22 @@ public class CarController : MonoBehaviour
         // Se le asigna el componente real al player input y al Rigidbody.
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
-
-        // Permite modificar el centro de gravedad del objeto, en este caso se bajó para que el carro no se volteara.
+        
+        // Permite modificar el centro de gravedad del objeto, en este caso se baj� para que el carro no se volteara.
         rb.centerOfMass = new Vector3(0f, -0.5f, 0f);
 
-        // Guarda la fuerza original del motor
-        originalMotorForce = motorForce;
     }
 
     private void FixedUpdate()
     {
-        // Se inicializan los métodos
+        // Se inicializan los m�todos
         GetInput();
         Motor();
         Steering();
         UpdateWheels();
-
-        // Manejar el turbo
-        HandleTurbo();
     }
 
-    // Método que maneja la lógica del turbo
-    private void HandleTurbo()
-    {
-        // Activar el turbo cuando se presione la tecla asignada
-        if (Input.GetKeyDown(turboKey) && !isTurboActive)
-        {
-            ActivateTurbo();
-        }
-
-        // Si el turbo está activo, contar el tiempo
-        if (isTurboActive)
-        {
-            turboTimer += Time.fixedDeltaTime;
-
-            // Desactivar el turbo después de la duración especificada
-            if (turboTimer >= turboDuration)
-            {
-                DeactivateTurbo();
-            }
-        }
-    }
-
-    // Método para activar el turbo
-    private void ActivateTurbo()
-    {
-        motorForce *= turboSpeedMultiplier; // Aumenta la fuerza del motor
-        isTurboActive = true;
-        turboTimer = 0f; // Reinicia el temporizador
-        Debug.Log("Turbo activado!");
-    }
-
-    // Método para desactivar el turbo
-    private void DeactivateTurbo()
-    {
-        motorForce = originalMotorForce; // Restaura la fuerza original del motor
-        isTurboActive = false;
-        Debug.Log("Turbo desactivado.");
-    }
-
-    // Método que almacena el input del jugador.
+    // M�todo ue almacena el input del jugador-
     private void GetInput()
     {
         // Se almacena en la variable el input.
@@ -135,19 +80,19 @@ public class CarController : MonoBehaviour
         verticalInput = inputM.y;
     }
 
-    // Método que permite agregarle fuerza al motor.
+    // M�todo que permite agregarle fuerza al motor.
     private void Motor()
     {
-        // Con la opción motorTorque de collisionador de las ruedas frontales, se le puede agregar la velocidad y se multiplica por el input vertical.
+        // Con la opci�n motorToruqe de collisionador de las ruedas frontales, se le puede agregar la velocidad y se multiplica por el input vertical.
         frontLeftCollider.motorTorque = verticalInput * motorForce;
         frontRightCollider.motorTorque = verticalInput * motorForce;
     }
 
-    // Método que permite inicializar los frenos
+    // M�todo que permite inicializar los frenos
     public void Break(InputAction.CallbackContext context)
     {
-        // Cuando el evento se encuentra en ejecución, y, usando la opción brakeTorque de los colisionadores de las ruedas, se le asigna una fuerza de frenado.
-        if (context.performed)
+        // Cuando el evento se encuentra en ejecuci�n, y, usando la opci�n brakeToqrque de los colisionadores de las ruedas, se le asigna una fuerza de frenado.
+        if (context.performed) 
         {
             frontLeftCollider.brakeTorque = brakeForce;
             frontRightCollider.brakeTorque = brakeForce;
@@ -156,25 +101,27 @@ public class CarController : MonoBehaviour
         }
 
         // Cuando el evento termina o cancela, la fuerza de frenado se devuelve a 0 para que pueda volver a moverse.
-        if (context.canceled)
+        if (context.canceled) 
         {
             frontLeftCollider.brakeTorque = 0;
             frontRightCollider.brakeTorque = 0;
             backLeftCollider.brakeTorque = 0;
             backRightCollider.brakeTorque = 0;
+
         }
+
     }
 
-    // Método que permite asignarle a las ruedas frontales el giro.
+    // M�todo que permite asignarle a las ruedas frontales el giro.
     private void Steering()
     {
-        // La variable steering es igual al ángulo máximo por el input horizontal, para que verifique si se gira a la derecha o a la izquierda.
+        // La variable steering es igual al �ngulo m�ximo por el input horizontal, para que verifique si se gira a la derecha o a la izquierda.
         steering = maxSteeringAngle * horizontalInput;
         frontLeftCollider.steerAngle = steering;
         frontRightCollider.steerAngle = steering;
     }
 
-    // Método que permite actualizar el movimiento visual de las ruedas con el de los colisionadores.
+    // M�todo que permite actualizar el movimiento visual de las ruedas con el de los colisionadores.
     private void UpdateWheels()
     {
         UpdateSingleWheel(frontRightCollider, frontRightTransform);
@@ -183,18 +130,19 @@ public class CarController : MonoBehaviour
         UpdateSingleWheel(backLeftCollider, backLeftTransform);
     }
 
-    // Método que configura la actualización anterior.
+    // M�todo que configura la actualizaci�n anterior.
     private void UpdateSingleWheel(WheelCollider wheelCollider, Transform wheelTransform)
     {
-        // Se crean dos variables locales, una de posición y otra de rotación.
+        // Se crean dos variables locales, una de posici�n y otra de rotaci�n.
         Vector3 pos;
         Quaternion quat;
 
-        // Se obtiene la posición y rotación actual de los colisionadores.
+        // Se obtiene la posici�n y rotaci�n actual de los colisionadores.
         wheelCollider.GetWorldPose(out pos, out quat);
 
-        // Se le asigna a las ruedas visuales la posición y rotación obtenida.
+        // Se le asigna a las ruedas visuales la posici�n y rotaci�n obtenida.
         wheelTransform.position = pos;
         wheelTransform.rotation = quat;
     }
 }
+
