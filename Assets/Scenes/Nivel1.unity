@@ -3942,7 +3942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1270741033738815742, guid: baef22c184cac8f43a16187f45234094, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2091086984491073052, guid: baef22c184cac8f43a16187f45234094, type: 3}
       propertyPath: car
@@ -6772,11 +6772,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899fa6d29240542429e602779321e650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1052142082 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7056829668787337419, guid: baef22c184cac8f43a16187f45234094, type: 3}
-  m_PrefabInstance: {fileID: 685664176}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1073874692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8060,7 +8055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3809279f749c99d4ab26e8b227cc7626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1052142082}
+  target: {fileID: 8562363784718268670}
   offset: {x: 0, y: 2.65, z: -4.55}
   followSpeed: 20
   rotationSpeed: 20
@@ -13758,7 +13753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6358211739181918926, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6559282295540755848, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
       propertyPath: m_Enabled
@@ -13805,6 +13800,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
+--- !u!4 &8562363784718268670 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6022357220858095011, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
+  m_PrefabInstance: {fileID: 8562363784718268669}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
