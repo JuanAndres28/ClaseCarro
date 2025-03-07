@@ -22,6 +22,9 @@ public class CarController : MonoBehaviour
     // Variable para almacenar el �ngulo de las ruedas.
     private float steering;
 
+    [Header("Car")]
+    [SerializeField] private Cars car;
+
     // Variables que almacenan los Wheel Colliders de todas las ruedas.
     [Header("Wheel Data")]
     [SerializeField] private WheelCollider frontRightCollider;
@@ -145,4 +148,3 @@ public class CarController : MonoBehaviour
         wheelTransform.rotation = quat;
     }
 }
-

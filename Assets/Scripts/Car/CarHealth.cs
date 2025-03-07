@@ -48,7 +48,7 @@ public class CarHealth : MonoBehaviour, IDamageable
         Rigidbody rb = GetComponent<Rigidbody>();
 
         // Detener la velocidad
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
         // Mostrar una img, audio, etc.
