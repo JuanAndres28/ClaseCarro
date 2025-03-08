@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class CarController : MonoBehaviour
 {
@@ -56,8 +57,13 @@ public class CarController : MonoBehaviour
     [SerializeField] private KeyCode turboKey = KeyCode.LeftShift; // Tecla para activar el turbo
 
     private bool isTurboActive = false;
+    private bool hasTurbo = false; // Indica si el jugador tiene el turbo disponible
     private float turboTimer = 0f;
     private float originalMotorForce; // Almacena la fuerza original del motor
+
+    // Referencia al Slider de la UI para la barra de turbo
+    [Header("UI")]
+    [SerializeField] private Slider turboBar;
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +77,14 @@ public class CarController : MonoBehaviour
 
         // Guarda la fuerza original del motor
         originalMotorForce = motorForce;
+
+        // Configura el Slider de turbo
+        if (turboBar != null)
+        {
+            turboBar.maxValue = turboDuration;
+            turboBar.value = 0f; // Inicia vacío
+            turboBar.gameObject.SetActive(false); // Oculta la barra al inicio
+        }
     }
 
     private void FixedUpdate()
@@ -88,8 +102,8 @@ public class CarController : MonoBehaviour
     // Método que maneja la lógica del turbo
     private void HandleTurbo()
     {
-        // Activar el turbo cuando se presione la tecla asignada
-        if (Input.GetKeyDown(turboKey) && !isTurboActive)
+        // Activar el turbo cuando se presione la tecla asignada y el jugador tenga el turbo disponible
+        if (Input.GetKeyDown(turboKey) && hasTurbo && !isTurboActive)
         {
             ActivateTurbo();
         }
@@ -98,6 +112,12 @@ public class CarController : MonoBehaviour
         if (isTurboActive)
         {
             turboTimer += Time.fixedDeltaTime;
+
+            // Actualizar la barra de turbo
+            if (turboBar != null)
+            {
+                turboBar.value = turboDuration - turboTimer;
+            }
 
             // Desactivar el turbo después de la duración especificada
             if (turboTimer >= turboDuration)
@@ -112,8 +132,16 @@ public class CarController : MonoBehaviour
     {
         motorForce *= turboSpeedMultiplier; // Aumenta la fuerza del motor
         isTurboActive = true;
+        hasTurbo = false; // El turbo se consume al usarlo
         turboTimer = 0f; // Reinicia el temporizador
         Debug.Log("Turbo activado!");
+
+        // Activar la barra de turbo
+        if (turboBar != null)
+        {
+            turboBar.gameObject.SetActive(true);
+            turboBar.value = turboDuration; // Llenar la barra al activar
+        }
     }
 
     // Método para desactivar el turbo
@@ -122,6 +150,30 @@ public class CarController : MonoBehaviour
         motorForce = originalMotorForce; // Restaura la fuerza original del motor
         isTurboActive = false;
         Debug.Log("Turbo desactivado.");
+
+        // Desactivar la barra de turbo
+        if (turboBar != null)
+        {
+            turboBar.gameObject.SetActive(false);
+        }
+    }
+
+    // Método que detecta colisiones con objetos recolectables
+    private void OnTriggerEnter(Collider other)
+    {
+        // Verifica si el objeto tiene el tag "TurboItem"
+        if (other.CompareTag("TurboItem"))
+        {
+            CollectTurboItem(other.gameObject);
+        }
+    }
+
+    // Método para recolectar el ítem de turbo
+    private void CollectTurboItem(GameObject turboItem)
+    {
+        hasTurbo = true; // El jugador ahora tiene turbo disponible
+        Destroy(turboItem); // Destruye el objeto recolectable
+        Debug.Log("¡Ítem de turbo recolectado!");
     }
 
     // Método que almacena el input del jugador.
