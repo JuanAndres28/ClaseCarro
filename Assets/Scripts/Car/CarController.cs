@@ -136,10 +136,9 @@ public class CarController : MonoBehaviour
         turboTimer = 0f; // Reinicia el temporizador
         Debug.Log("Turbo activado!");
 
-        // Activar la barra de turbo
+        // Actualizar la barra de turbo
         if (turboBar != null)
         {
-            turboBar.gameObject.SetActive(true);
             turboBar.value = turboDuration; // Llenar la barra al activar
         }
     }
@@ -164,7 +163,15 @@ public class CarController : MonoBehaviour
         // Verifica si el objeto tiene el tag "TurboItem"
         if (other.CompareTag("TurboItem"))
         {
-            CollectTurboItem(other.gameObject);
+            // Solo recolectar el ítem si no hay turbo disponible y no está activo
+            if (!hasTurbo && !isTurboActive)
+            {
+                CollectTurboItem(other.gameObject);
+            }
+            else
+            {
+                Debug.Log("No puedes recolectar el turbo ahora. Usa el turbo actual primero.");
+            }
         }
     }
 
@@ -174,6 +181,13 @@ public class CarController : MonoBehaviour
         hasTurbo = true; // El jugador ahora tiene turbo disponible
         Destroy(turboItem); // Destruye el objeto recolectable
         Debug.Log("¡Ítem de turbo recolectado!");
+
+        // Mostrar la barra de turbo
+        if (turboBar != null)
+        {
+            turboBar.gameObject.SetActive(true);
+            turboBar.value = turboDuration; // Llenar la barra al máximo
+        }
     }
 
     // Método que almacena el input del jugador.
