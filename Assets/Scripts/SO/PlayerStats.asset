@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   Health: 0
-  MiniToys: 1
+  MiniToys: 0
+  MaxHealth: 1

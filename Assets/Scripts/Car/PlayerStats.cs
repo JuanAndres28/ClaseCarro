@@ -9,7 +9,8 @@ public class PlayerStats : ScriptableObject
 
   [Header("Health")]
   public float Health;
-  public float MiniToys; 
+  public float MiniToys;
+  public float MaxHealth; 
 
   //[Header("HUD")]
   //public float Speed;
@@ -18,7 +19,7 @@ public class PlayerStats : ScriptableObject
 
    public void ResetPlayer()
   {
-    Health = 1;
+    Health = MaxHealth;
     MiniToys=00;
   }
 }

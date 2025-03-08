@@ -10,6 +10,8 @@ public class Cars : ScriptableObject
     [SerializeField] private AudioClip honk;
     [SerializeField] private GameObject car;
     [SerializeField] private GameObject miniToy;
+    [SerializeField] private GameObject miniToy2;
+    [SerializeField] private GameObject miniToy3;
     [SerializeField] private Sprite carImage;
     [SerializeField] private string carName;
     [SerializeField] private float motorForce;
@@ -20,6 +22,8 @@ public class Cars : ScriptableObject
     public AudioClip Honk { get => honk; set => honk = value; }
     public GameObject Car { get => car; set => car = value; }
     public GameObject MiniToy { get => miniToy; set => miniToy = value; }
+    public GameObject MiniToy2 { get => miniToy2; set => miniToy2 = value; }
+    public GameObject MiniToy3 { get => miniToy3; set => miniToy3 = value; }
     public Sprite CarImage { get => carImage; set => carImage = value; }
     public string CarName { get => carName; set => carName = value; }
     public float MotorForce { get => motorForce; set => motorForce = value; }

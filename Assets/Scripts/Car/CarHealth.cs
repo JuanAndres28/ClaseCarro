@@ -5,10 +5,12 @@ using System.Collections.Generic;
 public class CarHealth : MonoBehaviour, IDamageable
 {
     [Header("Config")]
+    public List<GameObject> miniToys;
     [SerializeField] private PlayerStats stats;
     [SerializeField] private Transform spawnCarPosition;
 
     private Vector3 initialPosition;
+    private List<MiniToys> collectedMiniToys = new List<MiniToys>();
 
     private void Update()
     {
@@ -38,21 +40,42 @@ public class CarHealth : MonoBehaviour, IDamageable
             stats.Health = 0f;
             PlayerDead();
         }
+      if (collectedMiniToys.Count > 0)
+        {
+            int lastIndex = collectedMiniToys.Count - 1; // Obtener el índice del último MiniToy
+            MiniToys miniToyToDestroy = collectedMiniToys[lastIndex]; // Obtener el último MiniToy
+            collectedMiniToys.RemoveAt(lastIndex); // Eliminarlo de la lista
+            Destroy(miniToyToDestroy.gameObject); // Destruir el objeto
+            stats.MiniToys--; // Decrementar el contador de MiniToys
+        }
     }
 
     private void PlayerDead()
     {
         Debug.Log("el jugador murio");
-
-        // Obtener el Rigidbody
-        Rigidbody rb = GetComponent<Rigidbody>();
-
-        // Detener la velocidad
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        StartCoroutine(RespawnCoroutine());
 
         // Mostrar una img, audio, etc.
-        // StartCoroutine(RespawnCoroutine());
+    }
+
+    private IEnumerator RespawnCoroutine()
+    {
+        // Opcional: Esperar antes de reaparecer
+        yield return new WaitForSeconds(2f);
+
+        // Reaparecer al jugador en el punto de reaparición
+        if (spawnCarPosition != null)
+        {
+            transform.position = spawnCarPosition.position;
+        }
+        else
+        {
+            transform.position = initialPosition; // Reaparecer en la posición inicial si no hay punto de reaparición definido
+        }
+
+        stats.Health = stats.MaxHealth;
+        stats.MiniToys = 00; 
+
     }
 
     public void AddHealth(float amount)
@@ -67,8 +90,18 @@ public class CarHealth : MonoBehaviour, IDamageable
     {
         if (collision.gameObject.CompareTag("MiniToys"))
         {
+             MiniToys miniToy = collision.gameObject.GetComponent<MiniToys>();
+        if (miniToy != null)
+       {
+            int index = collectedMiniToys.Count; // Obtener el índice actual
+            miniToy.Collect(index); // Llama al método Collect del MiniToy con el índice
+            collectedMiniToys.Add(miniToy); // Agregar el MiniToy a la lista
+        }
+
+        
             AddHealth(1);
-            Destroy(collision.gameObject); // Destruir el miniToy una vez recogido
+            
         }
     }
+
 }
