@@ -853,8 +853,8 @@ GameObject:
   - component: {fileID: 218506882156125029}
   - component: {fileID: -7712046457329169521}
   m_Layer: 0
-  m_Name: Pato MiniToy
-  m_TagString: Player
+  m_Name: MiniToy 3
+  m_TagString: MiniToys
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -868,8 +868,8 @@ Transform:
   m_GameObject: {fileID: 6358211739181918926}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -25.68, y: 0.7, z: -25.41}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: -0.07, y: 0.5799532, z: -27.76}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8153610964477129490}
@@ -901,7 +901,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &218506882156125029
 BoxCollider:
@@ -918,7 +918,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -936,9 +936,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d6d2d502e33de4ea66078969e20144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followDistance: 2
+  target: {fileID: 0}
+  offset: {x: 0, y: 0, z: -3.5}
   followSpeed: 5
-  car: {fileID: 6022357220858095011, guid: cd357a549f1e7ae4f818ce0444ad20fe, type: 3}
+  rotationSpeed: 5
   stats: {fileID: 11400000, guid: 8b325c22021e61b418cd52003c4ef2a0, type: 2}
 --- !u!1 &7173917906431574665
 GameObject:
